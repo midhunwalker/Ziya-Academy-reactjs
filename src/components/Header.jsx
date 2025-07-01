@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import icon from '../assets/icon.webp';
+import icon from '../assets/icon4.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,19 +16,19 @@ const Header = () => {
 
   return (
     <header className="bg-black/30 backdrop-blur-sm shadow-sm fixed w-full top-0 z-50">
-      <nav className="w-full px-4 sm:px-6 lg:px-[100px]">
+      <nav className="w-full px-[50px]">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src={icon} alt="ZiyaAcademy Logo" className="h-16 w-auto" />
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-blue-500">ZiyaAcademy</h1>
-              <p className="text-xs sm:text-sm text-green-500">KEY TO SUCCESS</p>
-            </div>
-          </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-10">
+            <img src={icon} alt="ZiyaAcademy Logo" className="h-18 w-16" />
+              <div className="font-[Poppins]">
+                  <h1 className="text-xl sm:text-2xl font-bold text-blue-500">ZiyaAcademy</h1>
+                  <p className="text-xs sm:text-sm text-green-500">KEY TO SUCCESS</p>
+                </div>
+              </div>
+          
+          {/* Desktop Nav - doubled gap and larger button */}
+          <div className="hidden md:flex items-center space-x-16"> {/* Changed from space-x-10 to space-x-16 */}
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -38,7 +38,8 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
+            {/* Larger Join Now button */}
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-10 py-3 rounded-md text-md font-medium">
               Join Now
             </button>
           </div>
@@ -64,12 +65,13 @@ const Header = () => {
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block text-white py-2 px-2 rounded hover:bg-blue-600"
+                  className="block text-white py-3 px-3 rounded hover:bg-blue-600 text-lg" 
                 >
                   {item.name}
                 </a>
               ))}
-              <button className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">
+              {/* Larger mobile Join Now button */}
+              <button className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-md text-md font-medium">
                 Join Now
               </button>
             </div>

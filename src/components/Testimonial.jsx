@@ -5,16 +5,18 @@ import abhishek from '../assets/abhishek.jpeg';
 
 const Testimonial = () => {
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="px-4 sm:px-10 text-center sm:text-left">
+    <section className="py-12 bg-gray-50 font-[Poppins]">
+      {/* Title section with reduced left padding */}
+      <div className="px-8 text-center sm:text-left sm:pl-[70px]">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-500 underline">Testimonial</h2>
-        <p className="mt-2 sm:mt-4 text-black-600 text-xl sm:text-2xl underline">What our students say about us</p>
+        <p className="mt-2 sm:mt-4 text-black-600 text-xl sm:text-2xl">What our students say about us</p>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 sm:px-10">
+      {/* Cards container with increased side padding */}
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 px-[5%] md:px-[10%] 2xl:px-[15%]">
         {/* Testimonial Card 1 */}
-        <div className="w-full p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
-          <div className="flex items-start gap-4">
+        <div className="p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
+          <div className="flex items-start gap-3">
             <img
               src={praveenimage}
               alt="Praveen"
@@ -32,8 +34,8 @@ const Testimonial = () => {
         </div>
 
         {/* Testimonial Card 2 */}
-        <div className="w-full p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
-          <div className="flex items-start gap-4">
+        <div className="p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
+          <div className="flex items-start gap-3">
             <img
               src={reshma}
               alt="Reshma"
@@ -51,8 +53,8 @@ const Testimonial = () => {
         </div>
 
         {/* Testimonial Card 3 */}
-        <div className="w-full p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
-          <div className="flex items-start gap-4">
+        <div className="p-6 border-2 border-gray-200 rounded-lg shadow-md hover:border-blue-500 transition-colors duration-300">
+          <div className="flex items-start gap-3">
             <img
               src={abhishek}
               alt="Abhishek"
