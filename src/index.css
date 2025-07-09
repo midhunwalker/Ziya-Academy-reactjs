@@ -17,3 +17,24 @@
     @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-lg font-medium transition-all duration-200;
   }
 }
+
+.content-section {
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+}
+
+/* Optional: Responsive adjustments */
+@media (min-width: 768px) {
+  .content-section {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content-section {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaUser, FaEnvelope, FaPhoneAlt, FaBook, FaClipboardCheck } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhoneAlt, FaBook } from 'react-icons/fa';
 import laptopImage from '../assets/laptop.jpg';
 
 function ContactForm() {
@@ -15,8 +15,8 @@ function ContactForm() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData(prev => ({
+      ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
   };
@@ -37,41 +37,50 @@ function ContactForm() {
   };
 
   return (
-    <div id="contact"
-      className="min-h-screen flex flex-col md:flex-row items-start relative font-[Poppins]"
+    <div
+      id="contact"
+      className="min-h-screen flex flex-col md:flex-row items-start relative font-[Poppins] overflow-hidden"
       style={{
         backgroundImage: `url(${laptopImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-      }}>
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70"></div>
 
-      <div className="absolute inset-0 bg-green-400 opacity-50"></div>
-
-      <div className="container pt-6 md:pt-10 pb-6 md:pb-12 flex flex-col md:flex-row relative">
-        {/* Left Content - Mobile responsive */}
-        <div className="text-white mb-6 md:mb-0 mt-4 pt-4 md:pt-[100px] md:w-1/2 px-4 md:pl-[70px]">
-          <h1 className="text-2xl md:text-5xl font-bold mb-3 md:mb-4 leading-tight">
-            Unlock Your Potential <br className="hidden md:block"/>With Ziya Academy
+      {/* Content */}
+      <div className="container mx-auto pt-6 md:pt-10 pb-6 md:pb-12 flex flex-col md:flex-row relative z-10 px-4">
+        {/* Left Content */}
+        <div className="text-white mb-6 md:mb-0 mt-4 pt-4 md:pt-[100px] md:w-1/2">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-4 leading-tight">
+            Unlock Your Potential <br className="hidden md:block" />
+            With Ziya Academy
           </h1>
-          <p className="text-sm md:text-xl">
-            From school education to professional IT training<br className="hidden md:block"/>
+          <p className="text-sm sm:text-base md:text-xl">
+            From school education to professional IT training<br className="hidden md:block" />
             Your complete learning solutions.
           </p>
         </div>
 
-        {/* Right Form Section - Mobile responsive */}
-        <div className="md:w-1/2 w-full px-4 md:pl-[200px]">
+        {/* Right Form */}
+        <div className="md:w-1/2 w-full">
           <div className="text-white text-center mb-4 md:mb-6 pt-6 md:pt-[80px]">
-            <h2 className="text-xl md:text-4xl font-bold">Get Started</h2>
-            <p className="text-xs md:text-base mt-1">
-              Fill out the form below and we'll get back to you within 24 hours
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold">Get Started</h2>
+            <p className="text-xs sm:text-sm md:text-base mt-1">
+              Fill out the form below and we'll get back to you
             </p>
           </div>
 
-          <div className="w-full max-w-md mx-auto bg-white/30 backdrop-blur-sm rounded-lg p-4 md:p-8 shadow-xl">
-            <form onSubmit={handleSubmit} className='p-3 md:p-5'>
-              {/* Form Fields */}
-              {[{ field: 'fullName', icon: <FaUser /> }, { field: 'email', icon: <FaEnvelope /> }, { field: 'phone', icon: <FaPhoneAlt /> }].map(({ field, icon }) => (
+          <div className="w-full max-w-md mx-auto bg-white/20 backdrop-blur-sm rounded-lg p-4 md:p-8 shadow-xl border border-white/20">
+            <form onSubmit={handleSubmit} className="p-3 md:p-5">
+              {/* Common Fields */}
+              {[
+                { field: 'fullName', icon: <FaUser /> },
+                { field: 'email', icon: <FaEnvelope /> },
+                { field: 'phone', icon: <FaPhoneAlt /> }
+              ].map(({ field, icon }) => (
                 <div className="mb-3 md:mb-4" key={field}>
                   <label htmlFor={field} className="block text-white mb-1 text-sm md:text-base">
                     {field === 'fullName' ? 'Full Name' : field === 'email' ? 'Email Address' : 'Phone Number'}
@@ -86,16 +95,18 @@ function ContactForm() {
                       name={field}
                       value={formData[field]}
                       onChange={handleChange}
-                      className="w-full pl-9 md:pl-10 py-2 bg-white rounded border-0 focus:ring-2 focus:ring-blue-600 outline-none transition-shadow text-sm md:text-base"
+                      className="w-full pl-9 md:pl-10 py-2 bg-white/90 rounded-lg border-0 focus:ring-2 focus:ring-blue-600 outline-none transition-shadow text-sm md:text-base"
                       required
                     />
                   </div>
                 </div>
               ))}
 
-              {/* Interest Field */}
+              {/* Interest */}
               <div className="mb-3 md:mb-4">
-                <label htmlFor="interest" className="block text-white mb-1 text-sm md:text-base">I'm Interested In</label>
+                <label htmlFor="interest" className="block text-white mb-1 text-sm md:text-base">
+                  I'm Interested In
+                </label>
                 <div className="relative group">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 group-focus-within:text-blue-600 transition-colors text-sm md:text-base">
                     <FaBook />
@@ -105,42 +116,68 @@ function ContactForm() {
                     name="interest"
                     value={formData.interest}
                     onChange={handleChange}
-                    className="w-full pl-9 md:pl-10 py-2 bg-white rounded border-0 focus:ring-2 focus:ring-blue-600 outline-none appearance-none text-sm md:text-base"
+                    className="w-full pl-9 md:pl-10 py-2 bg-white/90 rounded-lg border-0 focus:ring-2 focus:ring-blue-600 outline-none appearance-none text-sm md:text-base"
                     required
                   >
                     <option value="" disabled>Choose Your Area Of Interest</option>
-                    <option value="other">School Education LKG To +2</option>
+                    <option value="school">School Education LKG To +2</option>
                     <option value="other">NIOS (National Institute Of Open School)</option>
                     <option value="other">IGNOU (Distance Learning)</option>
                     <option value="intership">Professional Internship Program</option>
-                    <option value="other">IT Service And Solutions</option>
+                    <option value="service">IT Service And Solutions</option>
                   </select>
                 </div>
               </div>
 
-              {/* Specialization Field */}
+              {/* Specialization */}
               {formData.interest === 'intership' && (
-                <div className="mb-3 md:mb-4">
-                  <label htmlFor="specialization" className="block text-white mb-1 text-sm md:text-base">Choose Internship Program</label>
-                  <div className="group">
-                    <select
-                      id="specialization"
-                      name="specialization"
-                      value={formData.specialization}
-                      onChange={handleChange}
-                      className="w-full py-2 bg-white rounded border-0 focus:ring-2 focus:ring-blue-600 outline-none appearance-none text-sm md:text-base"
-                      required
-                    >
-                      <option value="" disabled>Select your specialization</option>
-                      <option value="python">Python Development</option>
-                      <option value="react">React.js Development</option>
-                      <option value="flutter">Flutter Mobile Development</option>
-                      <option value="uiux">UI/UX Design</option>
-                      <option value="mern">MERN Stack Development</option>
-                      <option value="testing">Software Testing & QA</option>
-                    </select>
-                  </div>
-                </div>
+                <SelectBox
+                  label="Choose Internship Program"
+                  name="specialization"
+                  value={formData.specialization}
+                  options={[
+                    'Python Development',
+                    'React.js Development',
+                    'Flutter Mobile Development',
+                    'UI/UX Design',
+                    'MERN Stack Development',
+                    'Software Testing & QA'
+                  ]}
+                  onChange={handleChange}
+                />
+              )}
+
+              {formData.interest === 'school' && (
+                <SelectBox
+                  label="Choose your class"
+                  name="specialization"
+                  value={formData.specialization}
+                  options={[
+                    'Plus Two (12th Grade)',
+                    'Plus One (11th Grade)',
+                    'Classes 6th to 10th',
+                    'Classes 1st to 5th',
+                    'UKG (Upper Kindergarten)',
+                    'LKG (Lower Kindergarten)'
+                  ]}
+                  onChange={handleChange}
+                />
+              )}
+
+              {formData.interest === 'service' && (
+                <SelectBox
+                  label="Choose the service you need"
+                  name="specialization"
+                  value={formData.specialization}
+                  options={[
+                    'Mobile App Development',
+                    'Web Application Development',
+                    'Dashboard & Analytics Solutions',
+                    'E-commerce Solutions',
+                    'Custom Software Development'
+                  ]}
+                  onChange={handleChange}
+                />
               )}
 
               {/* Terms Checkbox */}
@@ -159,28 +196,31 @@ function ContactForm() {
                 </div>
               )}
 
-              {/* Message Field */}
+              {/* Message */}
               <div className="mb-4 md:mb-6">
-                <label htmlFor="message" className="block text-white mb-1 text-sm md:text-base">Message or Specific Requirements</label>
-                <div className="group">
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="3"
-                    className="w-full py-2 px-3 bg-white rounded border-0 focus:ring-2 focus:ring-blue-600 outline-none resize-none text-sm md:text-base"
-                    placeholder="Tell us more..."
-                  ></textarea>
-                </div>
+                <label htmlFor="message" className="block text-white mb-1 text-sm md:text-base">
+                  Message or Specific Requirements
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full py-2 px-3 bg-white/90 rounded-lg border-0 focus:ring-2 focus:ring-blue-600 outline-none resize-none text-sm md:text-base"
+                  placeholder="Tell us more..."
+                ></textarea>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 md:py-3 px-4 rounded transition duration-300 uppercase focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 text-sm md:text-base"
-              >
-                Send Enquiry
-              </button>
+              {/* Submit Button */}
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 md:py-3 px-6 rounded-2xl transition duration-300 uppercase focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 text-sm md:text-base"
+                >
+                  Send Enquiry
+                </button>
+              </div>
             </form>
           </div>
         </div>
@@ -188,5 +228,25 @@ function ContactForm() {
     </div>
   );
 }
+
+// Reusable SelectBox Component
+const SelectBox = ({ label, name, value, options, onChange }) => (
+  <div className="mb-3 md:mb-4">
+    <label htmlFor={name} className="block text-white mb-1 text-sm md:text-base">{label}</label>
+    <select
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      className="w-full py-2 bg-white/90 rounded-lg border-0 focus:ring-2 focus:ring-blue-600 outline-none appearance-none text-sm md:text-base"
+      required
+    >
+      <option value="" disabled>Select your option</option>
+      {options.map((opt, i) => (
+        <option key={i} value={opt.toLowerCase().replace(/\s+/g, '-')}>{opt}</option>
+      ))}
+    </select>
+  </div>
+);
 
 export default ContactForm;
